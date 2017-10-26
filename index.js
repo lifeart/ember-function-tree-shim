@@ -20,6 +20,13 @@ module.exports = {
   isDevelopingAddon() {
     return true;
   },
+  included(app, parentAddon) {
+    var target = (parentAddon || app);
+    target.options = target.options || {};
+    target.options.babel = target.options.babel || { includePolyfill: true };
+    this._super.included.apply(this, arguments);
+    target.import('vendor/shims/function-tree.js');
+  },
   treeForAddon (tree) {
     const app = this._findHost();
     const repoPath = './cerebral_src/packages/node_modules/';
