@@ -29,32 +29,10 @@ module.exports = {
   },
   treeForAddon (tree) {
     const app = this._findHost();
-    const repoPath = './cerebral_src/packages/node_modules/';
-    const reduxPath = path.dirname(path.resolve(repoPath + 'function-tree/src/index.js'));
-    // const reduxPath = path.dirname(require.resolve('function-tree/src/index.js'));
+    //const repoPath = './cerebral_src/packages/node_modules/';
+    //const reduxPath = path.dirname(path.resolve(repoPath + 'function-tree/src/index.js'));
+    const reduxPath = path.dirname(require.resolve('function-tree/es/index.js'));
     let reduxTree = this.treeGenerator(reduxPath);
-
-    // Fix import paths to not include ".js" extension in name
-    // reduxTree = replace(reduxTree, {
-    //   files: '**/*.js',
-    //   patterns: [
-    //     {
-    //       match: /process\.env\.NODE_ENV/g,
-    //       replacement: `"${app.env}"`
-    //     }
-    //   ]
-    // });
-
-    // let addon = this.addons.find(addon => addon.name === 'ember-cli-babel');
-
-    // reduxTree = addon.transpileTree(reduxTree, {
-    //   babel: {
-    //     plugins: ['babel-plugin-transform-object-rest-spread']
-    //   },
-    //   'ember-cli-babel': {
-    //     compileModules: false
-    //   }
-    // });
 
     if (!tree) {
       return this._super.treeForAddon.call(this, reduxTree);
